@@ -100,7 +100,7 @@
 									</arguments>
 								</configuration>
 							</execution>
-							<!-- build the installer for windows -->
+							<!-- build the installer for windows - ->
 							<execution>
 								<id>build</id>
 								<goals>
@@ -115,7 +115,7 @@
 										<argument>-x</argument>
 									</arguments>
 								</configuration>
-							</execution>
+							</execution> -->
 							<!--
 							<execution>	
 								<id>runUnitTests</id>
@@ -132,7 +132,7 @@
 						</executions>
 					</plugin>
 					
-					<!-- Move the header files and the lib/dll to the target directory -->
+					<!-- Move the header files and the lib/dll to the target directory and zip them -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-assembly-plugin</artifactId>
@@ -144,9 +144,9 @@
 								<goals>
 									<goal>single</goal>
 								</goals>
-								<configuration>          
+								<configuration> 
 									<descriptors>
-										<descriptor>dist-windows.xml</descriptor>
+										<descriptor>${project.build.sourceDirectory}/dist-windows.xml</descriptor>
 									</descriptors>
 									<appendAssemblyId>false</appendAssemblyId> 
 								</configuration>
@@ -229,7 +229,7 @@
 						</executions>
 					</plugin>
 					
-					<!-- Move Starbuck.app into a target directory -->
+					<!-- Move Starbuck.app into a target directory and zip them -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-assembly-plugin</artifactId>
@@ -243,7 +243,7 @@
 								</goals>
 								<configuration>          
 									<descriptors>
-										<descriptor>dist-mac.xml</descriptor>
+										<descriptor>${project.build.sourceDirectory}/dist-mac.xml</descriptor>
 									</descriptors>
 									<appendAssemblyId>false</appendAssemblyId> 
 								</configuration>
