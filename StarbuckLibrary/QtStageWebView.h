@@ -28,8 +28,18 @@
 #include <QWebHistory>
 #include <QWebFrame>
 #include "irimstagewebview.h"
+#include "PlatformInputEvents.h"
 
 using namespace BlackBerry::Starbuck::IPCChannel;
+
+namespace BlackBerry {
+  namespace Starbuck {
+    
+    class EventHandler;
+    class NormalEventHandler;
+    class SelectionEventHandler;
+    class MultiTouchEventHandler;
+    class TouchEvent;
 
 class QtStageWebView :	public QWebView, public IStarbuckWebView
 {
@@ -597,22 +607,50 @@ public:
 	//fullscreenExited
 
 signals:
-	void urlChanged(QString);
-	void javaScriptWindowObjectCleared();
-  void jsLoaded();
-private:
-//	QObject *locationChangeListenerObj;
-//	char *locationChangeListenerMethod;
-	char **_headers;
-	unsigned int _headersSize;
-  bool waitForJsLoad;
-  
-  void registerEventbus();
+    void urlChanged(QString);
+    void javaScriptWindowObjectCleared();
+    void jsLoaded();
 
-  public slots:
+private:
+    char **_headers;
+    unsigned int _headersSize;
+    bool waitForJsLoad;
+
+    // For animate scolling:
+    QPoint m_lastContentPos;
+    QPoint m_nextScrollStepLength;
+    QTimer m_scrollTimer;
+
+   // event handler
+   EventHandler* m_eventHandler;
+  
+  friend class TouchEventHandler;
+  friend class EventHandler;
+  friend class NormalEventHandler;
+  friend class SelectionEventHandler;
+  friend class MultiTouchEventHandler;
+
+  void registerEventbus();
+  QPoint validateScrollPoint(const QPoint& point);
+  void clearFocusNode();
+  void handleMouseEvent(QMouseEvent me);
+  bool scrollNodeRecursively(QWebFrame* subframe, QSize delta);
+  QPoint getFatFingerPos(QPoint& pos);
+
+public slots:
     void continueLoad();
+    void animateScroll();
+
 private slots:
 	void notifyUrlChanged(const QUrl& url);
 	void notifyJavaScriptWindowObjectCleared();
+
+protected:
+  virtual void mouseMoveEvent(QMouseEvent*);
+  virtual void mousePressEvent(QMouseEvent*);
+  virtual void mouseDoubleClickEvent(QMouseEvent*);
+  virtual void mouseReleaseEvent(QMouseEvent*);
 };
+} //end Starbuck
+} //end BlackBerry
 #endif //QTSTAGEWEBVIEW_H

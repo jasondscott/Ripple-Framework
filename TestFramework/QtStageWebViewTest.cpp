@@ -16,6 +16,8 @@
 
 #include "QtStageWebViewTest.h"
 
+using namespace BlackBerry::Starbuck;
+
 TEST(QtStageWebView, CanRetrieveEmptyLocation)
 {
 	QtStageWebView webview;

@@ -10,22 +10,24 @@ SET(STARBUCKLIBRARY_INCLUDE_DIRECTORIES
 
 LIST(APPEND STARBUCKLIBRARY_SOURCES
     ConfigData.cpp
-    #RIMStageWebView.cpp
     QtStageWebView.cpp
     stageviewmsghandler.cpp
     xhrmsghandler.cpp
     BlackBerryBus.cpp
     RequestObject.cpp
+    TouchEventHandler.cpp
+    WebViewEventHandler.cpp
     stdafx.cpp
 )
 
 SET(STARBUCKLIBRARY_MOC_HEADERS
-    #RIMStageWebView.h
     QtStageWebView.h
     stageviewmsghandler.h
     xhrmsghandler.h
     BlackBerryBus.h
     RequestObject.h
+    TouchEventHandler.h
+    WebViewEventHandler.h
 )
 
 QT4_WRAP_CPP(STARBUCKLIBRARY_MOC_SRCS ${STARBUCKLIBRARY_MOC_HEADERS})
