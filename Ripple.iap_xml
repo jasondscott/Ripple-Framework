@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This script was automatically generated using InstallAnywhere 2010 Enterprise, Build 3972
      STATUS: Fully-Functional UNLICENSED Trial Edition
-     DATE:   Tue Aug 09 10:51:49 EDT 2011 -->
+     DATE:   Fri Aug 12 08:14:06 EDT 2011 -->
 <InstallAnywhere_Deployment_Project increments="2214">
 	<!-- ** DO NOT EDIT ** Essential authorization and configuration data ** DO NOT EDIT ** -->
 	<essentialScriptInfo>
@@ -10,7 +10,7 @@
 		<scriptID>12,42,11,85,78,76,73,67,69,78,83,69,68</scriptID>
 		<buildID>3,13,71,87,105,110,100,111,119,115,32,88,80,44,32,53,46,49,44,32,120,56,54,59,32,74,97,118,97,32,49,46,54,46,48,95,49,53,44,32,83,117,110,32,77,105,99,114,111,115,121,115,116,101,109,115,32,73,110,99,46,44,32,104,116,116,112,58,47,47,106,97,118,97,46,115,117,110,46,99,111,109,47,59,32,101,110,44,32,85,110,107,110,111,119,110,59,32,67,112,49,50,53,50</buildID>
 		<!-- The authorizationID may change between project saves and builds.  This does not effect the integrity of the project, nor do changes in this value represent changes in the actual InstallAnywhere project. -->
-		<authorizationID>1,0,0,48,-93,5,48,-96,64,99,70,101,125,121,100,96,105,48,48,49,56,52,67,98,113,112,124,44,81,100,99,62,57,15,14,2,0,23,111,1,1,0,0</authorizationID>
+		<authorizationID>1,0,0,48,-77,-27,-48,-64,64,99,70,101,125,121,100,96,105,48,48,49,56,52,67,98,113,112,124,44,81,100,99,62,57,15,14,12,15,25,109,1,1,0,0</authorizationID>
 	</essentialScriptInfo>
 	<installationObjects uniqueObjects="111">
 		<object class="com.zerog.ia.installer.Installer" objectID="a549fc3c9248">
@@ -857,7 +857,7 @@ Press "Done" to quit the installer.]]></string>
 				<object class="java.util.Properties">
 					<method name="put">
 						<string><![CDATA[com.zerog.ia.project.save.last.date]]></string>
-						<string><![CDATA[August 9, 2011 10:51:49 AM EDT]]></string>
+						<string><![CDATA[August 12, 2011 8:14:06 AM EDT]]></string>
 					</method>
 					<method name="put">
 						<string><![CDATA[com.zerog.ia.build.options.optimization.platform.merge]]></string>
@@ -953,7 +953,7 @@ Press "Done" to quit the installer.]]></string>
 					</method>
 					<method name="put">
 						<string><![CDATA[com.zerog.ia.build.options.output.location]]></string>
-						<string><![CDATA[$IA_PROJECT_DIR$\installer\INSTALL_RELEASE]]></string>
+						<string><![CDATA[$IA_PROJECT_DIR$\installer\Ripple_Build_Output]]></string>
 					</method>
 					<method name="put">
 						<string><![CDATA[com.zerog.ia.build.options.output.cdrom]]></string>
