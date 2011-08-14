@@ -1,0 +1,16 @@
+<html>
+    <body>
+        <script type="text/javascript">
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "index.html");
+            xhr.onReadyStateChange = function () {
+                if (xhr.readyState === 4) {
+                    alert("got it!");
+                }
+            };
+            xhr.send();
+        
+        </script>
+    </body>
+</html>

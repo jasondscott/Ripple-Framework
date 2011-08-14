@@ -1,0 +1,14 @@
+<html>
+	<body>
+        <div id="msg"></div>
+        <script type="text/javascript">
+            window.onRequest = function (request) {
+                document.getElementById("msg").innerText = request.url;
+            };
+
+            window.addEventListener("load", function () {
+                stagewebview.loadUrl("frame.html");
+            });
+        </script>
+	</body>
+</html>
