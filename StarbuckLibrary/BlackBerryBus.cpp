@@ -34,6 +34,17 @@ BlackBerryBus::~BlackBerryBus()
 
 }
 
+void BlackBerryBus::initbus()
+{
+    // load eventbus source from js
+    QFile inSrc("bus.js");
+    inSrc.open(QIODevice::ReadOnly);
+    QTextStream stream(&inSrc);
+    this->_eventSrc = stream.readAll();
+    inSrc.close();
+    this->m_pWebFrame->evaluateJavaScript(_eventSrc);
+}
+
 QString BlackBerryBus::generateRandomFunctionName()
 {
     const char *alphaSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
