@@ -25,6 +25,7 @@ StageViewMsgHandler::StageViewMsgHandler(QObject *parent)
 {
 	QString request_string;
 	m_pRequest = new RequestObject(request_string, this);
+	m_pResponse = new RequestObject(request_string, this);
 }
 
 StageViewMsgHandler::~StageViewMsgHandler()
@@ -145,9 +146,48 @@ void StageViewMsgHandler::resourceRequest(QNetworkRequest* request)
   emit onRequest(m_pRequest);
   //qDebug() << " stagewebview.OnRequest() emitted";
 }
+
 void StageViewMsgHandler::resourceReply(QNetworkReply* reply)
 {
-  //qDebug() << "emit stagewebview.OnResponse(), url:" << reply->url().toString();
-  emit onResponse(this);
-  //qDebug() << " stagewebview.onResponse() emitted";
+	if (reply->isFinished())
+	{
+		QString request_string(reply->url().toString());
+		m_pResponse->setUrl(request_string);
+		m_pResponse->setWebFrame(rimStageWebview()->page()->mainFrame());
+		emit onResponse(m_pResponse);
+		//qDebug() << " stagewebview.onResponse() emitted";
+	}
+	else
+	{
+		m_pNetworkReply = reply;
+		connect(m_pNetworkReply, SIGNAL(finished()), this, SLOT(resourceReplyFinished()));
+	}
+}
+
+void StageViewMsgHandler::resourceReplyFinished()
+{
+	disconnect(m_pNetworkReply, SIGNAL(finished()), this, SLOT(resourceReplyFinished()));
+
+	if (m_pNetworkReply->error() == QNetworkReply::NoError)
+	{
+		QString request_string(m_pNetworkReply->url().toString());
+		m_pResponse->setUrl(request_string);
+		m_pResponse->setWebFrame(rimStageWebview()->page()->mainFrame());
+		emit onResponse(m_pResponse);
+		//qDebug() << " stagewebview.onResponse() emitted";
+	}
+	else if (m_pNetworkReply->error() == QNetworkReply::ProtocolUnknownError)
+	{
+		QString request_string(m_pNetworkReply->url().toString());
+		m_pResponse->setUrl(request_string);
+		m_pResponse->setWebFrame(rimStageWebview()->page()->mainFrame());
+		emit onResponse(m_pResponse);
+		//qDebug() << " stagewebview.onResponse() emitted";
+	}
+	else
+	{
+		// Unexpected error occurred.  Do nothing.
+	}
+
+	m_pNetworkReply = NULL;
 }

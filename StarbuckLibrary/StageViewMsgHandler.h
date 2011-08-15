@@ -57,6 +57,7 @@ public slots:
 	void processMessage(Message* pMsg);
     void resourceRequest(QNetworkRequest* request);
     void resourceReply(QNetworkReply* reply);
+	void resourceReplyFinished();
 	void reload();
 
 //stagewebview events
@@ -72,6 +73,9 @@ protected:
 
 private:
     RequestObject* m_pRequest;
+	RequestObject* m_pResponse;
+
+	QNetworkReply* m_pNetworkReply;
 
 	virtual IStarbuckWebView* stageWebview()
 	{
