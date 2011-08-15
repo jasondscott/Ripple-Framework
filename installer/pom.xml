@@ -1,23 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<groupId>net.rim.starbuck</groupId>
-		<artifactId>starbuck</artifactId>
-		<version>1.0.0.1-SNAPSHOT</version>
-	</parent>
-   
+	   
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.rim.starbuck</groupId>
     <artifactId>installer</artifactId>
-	<version>${project.parent.version}</version>
+	<version>1.0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}-${project.version}</name>
 	<packaging>pom</packaging>
 	
 	<dependencies>
       <dependency>
          <groupId>net.rim.starbuck</groupId>
-         <artifactId>${project.parent.artifactId}</artifactId>
-         <version>${project.parent.version}</version>
+         <artifactId>starbuck</artifactId>
+         <version>1.0.0.1-SNAPSHOT</version>
 		 <type>zip</type>
          <scope>compile</scope>
       </dependency>
@@ -44,7 +39,7 @@
 							<artifactItem>
 							<groupId>net.rim.starbuck</groupId>
 							<artifactId>starbuck</artifactId>
-							<version>${project.parent.version}</version>
+							<version>${project.version}</version>
 							<type>zip</type>
 							<overWrite>true</overWrite>
 							<outputDirectory>${project.build.sourceDirectory}/target/Starbuck</outputDirectory>
