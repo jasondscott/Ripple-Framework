@@ -149,25 +149,20 @@ void StageViewMsgHandler::resourceRequest(QNetworkRequest* request)
 
 void StageViewMsgHandler::resourceReply(QNetworkReply* reply)
 {
-	if (reply->isFinished())
+	m_pNetworkReply = reply;
+
+	if (m_pNetworkReply->isFinished())
 	{
-		QString request_string(reply->url().toString());
-		m_pResponse->setUrl(request_string);
-		m_pResponse->setWebFrame(rimStageWebview()->page()->mainFrame());
-		emit onResponse(m_pResponse);
-		//qDebug() << " stagewebview.onResponse() emitted";
+		resourceReplyFinished();
 	}
 	else
 	{
-		m_pNetworkReply = reply;
 		connect(m_pNetworkReply, SIGNAL(finished()), this, SLOT(resourceReplyFinished()));
 	}
 }
 
 void StageViewMsgHandler::resourceReplyFinished()
 {
-	disconnect(m_pNetworkReply, SIGNAL(finished()), this, SLOT(resourceReplyFinished()));
-
 	if (m_pNetworkReply->error() == QNetworkReply::NoError)
 	{
 		QString request_string(m_pNetworkReply->url().toString());
