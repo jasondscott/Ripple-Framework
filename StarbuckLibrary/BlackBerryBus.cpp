@@ -77,7 +77,7 @@ void BlackBerryBus::trigger(QString eventName, QString jsonData)
     for(int i = 0; i < (*info).length(); i++)
     {
       CallbackInfo callback = (*info)[i];
-      QString evalString("eventbus.internal('" + eventName + "', '" + "" + ")");
+      QString evalString("eventbus.execute('" + callback.function + "', " + jsonData + ")");
 
       if (_async)
       {
