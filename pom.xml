@@ -10,10 +10,8 @@
     <qtwebkit_tmp>${basedir}/qtwebkit_tmp</qtwebkit_tmp>
   </properties>
   <scm>
-    <connection>
-    scm:git:git@git.rim.net:/devtools/starbuck/framework.git</connection>
-    <developerConnection>
-    scm:git:git@git.rim.net:/devtools/starbuck/framework.git</developerConnection>
+    <connection>scm:git:git@git.rim.net:/devtools/starbuck/framework.git</connection>
+    <developerConnection>scm:git:git@git.rim.net:/devtools/starbuck/framework.git</developerConnection>
     <url>/devtools/starbuck/framework.git</url>
   </scm>
   <dependencies>
@@ -37,8 +35,7 @@
         <configuration>
           <filesets>
             <fileset>
-              <directory>
-              ${project.build.sourceDirectory}</directory>
+              <directory>${project.build.sourceDirectory}</directory>
               <includes>
                 <include>build/</include>
               </includes>
@@ -72,39 +69,6 @@
   </build>
   <profiles>
     <profile>
-      <id>StartCIBuildOnMac</id>
-      <activation>
-        <property>
-          <name>IsCIBuildOnWindows</name>
-          <value>yes</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>1.1</version>
-            <executions>
-              <execution>
-                <id>startBuildOnMac</id>
-                <goals>
-                  <goal>exec</goal>
-                </goals>
-                <phase>initialize</phase>
-                <configuration>
-                  <executable>curl</executable>
-                  <arguments>
-                    <argument>${env.FRAMEWORK_BUILD_JOB_URL}</argument>
-                  </arguments>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
       <id>windows</id>
       <activation>
         <os>
@@ -116,7 +80,7 @@
         <QT_LIB>${env.QTDIR}/lib</QT_LIB>
         <QT_SRC>${env.QTDIR}/src/3rdparty/webkit</QT_SRC>
         <QTWEBKIT_TMP>${project.build.sourceDirectory}/build/qtwebkit</QTWEBKIT_TMP>
-        <ASSEMBLY_DESCRIPTOR>dist-windows.xml</ASSEMBLY_DESCRIPTOR>
+        <ASSEMBLY_DESCRIPTOR>${project.build.sourceDirectory}/dist-windows.xml</ASSEMBLY_DESCRIPTOR>
       </properties>
       <build>
         <plugins>
@@ -139,8 +103,7 @@
                       <version>1.0.0.1-SNAPSHOT</version>
                       <type>zip</type>
                       <overWrite>true</overWrite>
-                      <outputDirectory>
-                      ${QTWEBKIT_TMP}</outputDirectory>
+                      <outputDirectory>${QTWEBKIT_TMP}</outputDirectory>
                     </artifactItem>
                   </artifactItems>
                 </configuration>
@@ -162,8 +125,7 @@
                   <outputDirectory>${QT_BIN}</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>
-                      ${QTWEBKIT_TMP}/win/bin</directory>
+                      <directory>${QTWEBKIT_TMP}/win/bin</directory>
                       <filtering>false</filtering>
                       <includes>
                         <include>*.dll</include>
@@ -183,8 +145,7 @@
                   <outputDirectory>${QT_LIB}</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>
-                      ${QTWEBKIT_TMP}/win/bin</directory>
+                      <directory>${QTWEBKIT_TMP}/win/bin</directory>
                       <filtering>false</filtering>
                       <includes>
                         <include>*.lib</include>
@@ -203,8 +164,7 @@
                   <outputDirectory>${QT_SRC}</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>
-                      ${QTWEBKIT_TMP}/win/src</directory>
+                      <directory>${QTWEBKIT_TMP}/win/src</directory>
                       <filtering>false</filtering>
                       <includes>
                         <include>**/*</include>
@@ -227,8 +187,7 @@
                 </goals>
                 <phase>generate-resources</phase>
                 <configuration>
-                  <workingDirectory>
-                  ${project.build.sourceDirectory}/build</workingDirectory>
+                  <workingDirectory>${project.build.sourceDirectory}/build</workingDirectory>
                   <executable>cmake</executable>
                   <arguments>
                     <argument>..</argument>
@@ -245,8 +204,7 @@
                 </goals>
                 <phase>compile</phase>
                 <configuration>
-                  <workingDirectory>
-                  ${project.build.sourceDirectory}/build</workingDirectory>
+                  <workingDirectory>${project.build.sourceDirectory}/build</workingDirectory>
                   <executable>nmake</executable>
                 </configuration>
               </execution>
@@ -257,8 +215,7 @@
                 </goals>
                 <phase>process-classes</phase>
                 <configuration>
-                  <workingDirectory>
-                  ${project.build.sourceDirectory}/build</workingDirectory>
+                  <workingDirectory>${project.build.sourceDirectory}/build</workingDirectory>
                   <executable>nmake</executable>
                   <arguments>
                     <argument>install</argument>
@@ -267,36 +224,12 @@
               </execution>
             </executions>
           </plugin>
-          <!-- Move the header files and the lib/dll to the target directory -->
-          <!--
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>2.2</version>
-            <executions>
-              <execution>
-                <id>assembly</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>single</goal>
-                </goals>
-                <configuration>
-                  <descriptors>
-                    <descriptor>dist-windows.xml</descriptor>
-                  </descriptors>
-                  <appendAssemblyId>false</appendAssemblyId>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          -->
         </plugins>
       </build>
     </profile>
-
     <!-- pack artifact from windows and mac -->
     <profile>
-      <id>CheckFrameworkBuildStatusOnMac</id>
+      <id>CI Build On Windows</id>
       <activation>
         <property>
           <name>IsCIBuildOnWindows</name>
@@ -304,7 +237,7 @@
         </property>
       </activation>
       <properties>
-        <ASSEMBLY_DESCRIPTOR>dist-ci.xml</ASSEMBLY_DESCRIPTOR>
+        <ASSEMBLY_DESCRIPTOR>${project.build.sourceDirectory}/dist-ci.xml</ASSEMBLY_DESCRIPTOR>
       </properties>
       <build>
         <plugins>
@@ -314,7 +247,20 @@
             <version>1.1</version>
             <executions>
               <execution>
-                <id>Check Build Progress On Mac</id>
+                <id>start build job of framework on Mac</id>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>initialize</phase>
+                <configuration>
+                  <executable>curl</executable>
+                  <arguments>
+                    <argument>${env.FRAMEWORK_BUILD_JOB_URL}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>Check if build job is finished on Mac</id>
                 <goals>
                   <goal>exec</goal>
                 </goals>
@@ -332,7 +278,6 @@
         </plugins>
       </build>
     </profile>
-
     <profile>
       <id>mac</id>
       <activation>
@@ -367,8 +312,7 @@
                       <version>1.0.0.1-SNAPSHOT</version>
                       <type>zip</type>
                       <overWrite>true</overWrite>
-                      <outputDirectory>
-                      ${QTWEBKIT_TMP}</outputDirectory>
+                      <outputDirectory>${QTWEBKIT_TMP}</outputDirectory>
                     </artifactItem>
                   </artifactItems>
                 </configuration>
@@ -390,8 +334,7 @@
                   <outputDirectory>${QT_LIB}</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>
-                      ${QTWEBKIT_TMP}/mac/bin</directory>
+                      <directory>${QTWEBKIT_TMP}/mac/bin</directory>
                       <filtering>false</filtering>
                       <includes>
                         <include>**/*</include>
@@ -410,8 +353,7 @@
                   <outputDirectory>${QT_HEADER}</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>
-                      ${QTWEBKIT_TMP}/mac/bin/QtWebkit.framework/Headers</directory>
+                      <directory>${QTWEBKIT_TMP}/mac/bin/QtWebkit.framework/Headers</directory>
                       <filtering>false</filtering>
                       <includes>
                         <include>*.h</include>
@@ -434,8 +376,7 @@
                 </goals>
                 <phase>generate-resources</phase>
                 <configuration>
-                  <workingDirectory>
-                  ${project.build.sourceDirectory}/build</workingDirectory>
+                  <workingDirectory>${project.build.sourceDirectory}/build</workingDirectory>
                   <executable>cmake</executable>
                   <arguments>
                     <argument>..</argument>
@@ -450,8 +391,7 @@
                 </goals>
                 <phase>compile</phase>
                 <configuration>
-                  <workingDirectory>
-                  ${project.build.sourceDirectory}/build</workingDirectory>
+                  <workingDirectory>${project.build.sourceDirectory}/build</workingDirectory>
                   <executable>make</executable>
                 </configuration>
               </execution>
@@ -462,8 +402,7 @@
                 </goals>
                 <phase>process-classes</phase>
                 <configuration>
-                  <workingDirectory>
-                  ${project.build.sourceDirectory}/build</workingDirectory>
+                  <workingDirectory>${project.build.sourceDirectory}/build</workingDirectory>
                   <executable>make</executable>
                   <arguments>
                     <argument>install</argument>
@@ -471,7 +410,7 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>          
+          </plugin>
         </plugins>
       </build>
     </profile>
@@ -482,7 +421,7 @@
           <name>IsCIBuildOnMac</name>
           <value>yes</value>
         </property>
-      </activation>      
+      </activation>
       <build>
         <plugins>
           <!-- Configure clean so that it also deletes the build/ folder -->
@@ -500,7 +439,7 @@
                 </fileset>
               </filesets>
             </configuration>
-          </plugin> 
+          </plugin>
           <!-- Copy framework artifact to share folder -->
           <plugin>
             <artifactId>maven-resources-plugin</artifactId>
@@ -539,8 +478,7 @@
                 </goals>
                 <phase>package</phase>
                 <configuration>
-                  <workingDirectory>
-                  ${env.FRAMEWORK_CI_SHARED_FOLDER}</workingDirectory>
+                  <workingDirectory>${env.FRAMEWORK_CI_SHARED_FOLDER}</workingDirectory>
                   <executable>touch</executable>
                   <arguments>
                     <argument>Framework_CI_Build_Finished</argument>
@@ -557,20 +495,17 @@
     <repository>
       <id>staging</id>
       <name>Rim Internal Releases</name>
-      <url>
-      http://maven.rim.net/nexus/service/local/staging/deploy/maven2</url>
+      <url>http://maven.rim.net/nexus/service/local/staging/deploy/maven2</url>
     </repository>
     <snapshotRepository>
       <id>waterloo-snapshots</id>
       <name>Rim Internal Snapshots</name>
-      <url>
-      http://maven.rim.net/nexus/content/repositories/waterloo-snapshots</url>
+      <url>http://maven.rim.net/nexus/content/repositories/waterloo-snapshots</url>
     </snapshotRepository>
     <site>
       <id>rim-dev-site</id>
       <name>Rim Internal Site</name>
-      <url>
-      dav:http://maven.rim.net:8081/nexus/content/sites/rim-dev-site/${project.groupId}</url>
+      <url>dav:http://maven.rim.net:8081/nexus/content/sites/rim-dev-site/${project.groupId}</url>
     </site>
   </distributionManagement>
 </project>
