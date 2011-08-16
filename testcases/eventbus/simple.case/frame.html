@@ -3,12 +3,13 @@
         <div id="msg"></div>
         <div id="song"></div>
         <script type="text/javascript">
-        
-            blackberry.bus.on("foo", function (msg) {
+
+            blackberry.bus.on("foo", function(msg) {
                 document.getElementById("msg").innerHTML = msg;
             });
 
-            blackberry.bus.on("range", function (o) {
+            blackberry.bus.on("range", function(o) {
+                var o = JSON.parse(o);
                 document.getElementById("song").innerHTML = o.give.me.a.home;
             });
 

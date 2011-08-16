@@ -3,15 +3,15 @@
         <div id="msg"> </div>
 
         <script type="text/javascript">
+            stagewebview.javaScriptInjected();
         
             window.addEventListener("load", function () {
-                stagewebview.loadUrl("frame.html");
+                stagewebview.loadUrl("http://localhost/starbuck/frame.html");
             });
 
-            blackberry.bus.on("foo", function (msg) {
+            blackberry.bus.on("foo", function(msg) {
                 document.getElementById("msg").innerHTML = msg;
-
-                blackberry.bus.trigger("range", {
+                var what = {
                     give: {
                         me: {
                             a: {
@@ -19,7 +19,8 @@
                             }
                         }
                     }
-                });
+                };
+                blackberry.bus.trigger("range", JSON.stringify(what));
             });
         
         </script>
