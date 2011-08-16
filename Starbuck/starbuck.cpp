@@ -113,13 +113,13 @@ void Starbuck::registerInternalAPIs()
 {
     QWebFrame* frame = webViewInternal->page()->mainFrame();
     frame->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame));
-//    frame->evaluateJavaScript("eventbus2.initbus()");
+    frame->evaluateJavaScript("eventbus2.initbus()");
 
     // check for iframes, if found add to window object
     for(int i = 0; i < frame->childFrames().length(); i++)
     {
         frame->childFrames()[i]->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame->childFrames()[i]));
-//        frame->childFrames()[i]->evaluateJavaScript("eventbus2.initbus()");
+        frame->childFrames()[i]->evaluateJavaScript("eventbus2.initbus()");
     }
 }
 
