@@ -14,36 +14,26 @@
 * limitations under the License.
 */
 
-#ifndef REQUESTOBJECT_H
-#define REQUESTOBJECT_H
-
-#include <QObject>
-#include <QWebFrame>
-#include <QWebPage>
+#pragma once
 
 namespace BlackBerry {
 namespace Starbuck {
-
-class RequestObject : public QObject
+namespace IPCChannel {
+class IStarbuckWebView
 {
-    Q_OBJECT
 public:
-    RequestObject(QString& url, QObject *parent = 0, QWebFrame* frame = 0 );
-    ~RequestObject();
-    Q_PROPERTY(QString url READ getUrl WRITE setUrl)
-    void setUrl(QString& url);
-    void setWebFrame(QWebFrame* frame);
-public slots:
-    void allow();
-    void deny();
-    void respond(QString code, QString url);
-private:
-    QString m_url;
-    QWebFrame* m_pWebFrame;
-    QString getUrl() const { return m_url; }
+	virtual void loadURL(QString url) = 0;
+	virtual void enableCrossSiteXHR(bool crossSiteXHR) = 0;
+	virtual QVariant executeJavaScript(QString script) = 0;
+	virtual QString location() = 0;
+	virtual void historyBack() = 0;
+	virtual void historyForward() = 0;
+	virtual bool isHistoryBackEnabled() = 0;
+	virtual bool isHistoryForwardEnabled() = 0;
+	virtual int historyLength() = 0;
+	virtual int historyPosition() = 0;
+	virtual void historyPosition(int position) = 0;
+	virtual void setWindowGeometry(int x, int y, int w, int h) = 0;
+    virtual void reload() = 0;
 };
-
-}
-}
-
-#endif
+}}}
