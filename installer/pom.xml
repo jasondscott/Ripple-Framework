@@ -62,7 +62,7 @@
 						</goals>
 						<phase>compile</phase>
 						<configuration>
-							<executable>build.exe</executable>
+							<executable>${env.IA_DIR}/build.exe</executable>
 							<arguments>
 								<argument>${project.build.sourceDirectory}/Ripple.iap_xml</argument>
 							</arguments>
