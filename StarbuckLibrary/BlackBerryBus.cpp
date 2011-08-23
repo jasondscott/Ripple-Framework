@@ -23,7 +23,7 @@ using namespace BlackBerry::Starbuck;
 QMap<QString, QList<CallbackInfo>*> BlackBerryBus::_listener;
 
 BlackBerryBus::BlackBerryBus(QObject *parent, QWebFrame *webFrame)
-  : QObject(parent), m_pWebFrame(webFrame), _async(false)
+  : QObject(parent), m_pWebFrame(webFrame), _async(true)
 {
     // seed the random generator
     qsrand(QTime::currentTime().msec());
@@ -63,8 +63,8 @@ QString BlackBerryBus::generateRandomFunctionName()
 // async version of trigger function
 void BlackBerryBus::trigger(QString eventName, QString jsonData, bool async)
 {
-    if (async)
-        _async = true;
+    if (!async)
+        _async = false;
     
     trigger(eventName, jsonData);
 }
