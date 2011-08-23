@@ -82,11 +82,11 @@ void BlackBerryBus::trigger(QString eventName, QString jsonData)
       if (_async)
       {
           callback.frame->evaluateJavaScript("setTimeout(\"" + evalString + "\", 1)");
-          _async = false;
       }
       else
       {
           callback.frame->evaluateJavaScript(evalString);
+          _async = true;
       }
 
     }
