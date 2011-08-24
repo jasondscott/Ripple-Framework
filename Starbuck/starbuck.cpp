@@ -48,6 +48,8 @@ void Starbuck::init(void)
     webViewInternal = new QtStageWebView;
 	webViewInternal->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 	webViewInternal->settings()->enablePersistentStorage(_config->localStoragePath());
+    webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,true);
+	webViewInternal->settings()->setWebSecurityEnabled(false);
 
     //Progress bar-------------------------
     progressBar = new QProgressBar(webViewInternal);
@@ -94,5 +96,6 @@ void Starbuck::registerAPIs()
 
 void Starbuck::resizeEvent(QResizeEvent * e )
 {
+	progressBar->setGeometry(QRect(0, (e->size().height() - PROGRESS_BAR_HEIGHT), e->size().width(), PROGRESS_BAR_HEIGHT));
     e->accept();
 }
