@@ -318,6 +318,42 @@
       </build>
     </profile>
 	
+	<!-- UnitTestsOnWindows profile runs the unit tests in the TestFramework project -->
+	<profile>
+      <id>Unit_Tests_on_Windows</id>
+      <activation>
+        <property>
+          <name>runUnitTestsOnWindows</name>
+          <value>yes</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
+              <execution>
+                <id>Run Unit Tests on Windows</id>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>test</phase>
+                <configuration>
+				  <workingDirectory>${project.build.sourceDirectory}/build/bin</workingDirectory>
+                  <executable>TestFramework.exe</executable>
+                  <arguments>
+                    <argument>--gtest_output=xml:test_output.xml</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+	
 	<profile>
       <id>mac</id>
       <activation>
@@ -524,6 +560,42 @@
                   <executable>touch</executable>
                   <arguments>
                     <argument>Framework_CI_Build_Finished</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+	
+	<!-- UnitTestsOnMac profile runs the unit tests in the TestFramework project -->
+	<profile>
+      <id>Unit_Tests_on_Mac</id>
+      <activation>
+        <property>
+          <name>runUnitTestsOnMac</name>
+          <value>yes</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
+              <execution>
+                <id>Run Unit Tests on Windows</id>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>test</phase>
+                <configuration>
+				  <workingDirectory>${project.build.sourceDirectory}/build/bin</workingDirectory>
+                  <executable>TestFramework</executable>
+                  <arguments>
+                    <argument>--gtest_output=xml:test_output.xml</argument>
                   </arguments>
                 </configuration>
               </execution>
