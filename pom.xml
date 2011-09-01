@@ -81,6 +81,7 @@
         <QT_SRC>${env.QTDIR}/src/3rdparty/webkit</QT_SRC>
         <QTWEBKIT_TMP>${project.build.sourceDirectory}/build/qtwebkit</QTWEBKIT_TMP>
         <ASSEMBLY_DESCRIPTOR>${project.build.sourceDirectory}/dist-windows.xml</ASSEMBLY_DESCRIPTOR>
+        <BUILD_TESTS>no</BUILD_TESTS>
       </properties>
       <build>
         <plugins>
@@ -196,6 +197,7 @@
                     <argument>cmake</argument>
                     <argument>..</argument>
                     <argument>-DCMAKE_BUILD_TYPE=Release</argument>
+                    <argument>-DBUILD_TESTS=${BUILD_TESTS}</argument>
                     <argument>-G</argument>
                     <argument>NMake Makefiles</argument>
                   </arguments>
@@ -366,6 +368,7 @@
         <QT_HEADER>${env.QTDIR}/include/QtWebKit</QT_HEADER>
         <QTWEBKIT_TMP>${project.build.sourceDirectory}/build/qtwebkit</QTWEBKIT_TMP>
         <ASSEMBLY_DESCRIPTOR>dist-mac.xml</ASSEMBLY_DESCRIPTOR>
+        <BUILD_TESTS>no</BUILD_TESTS>
       </properties>
       <build>
         <plugins>
@@ -457,6 +460,7 @@
                   <arguments>
                     <argument>..</argument>
                     <argument>-DCMAKE_BUILD_TYPE=Release</argument>
+                    <argument>-DBUILD_TESTS=${BUILD_TESTS}</argument>
                   </arguments>
                 </configuration>
               </execution>
