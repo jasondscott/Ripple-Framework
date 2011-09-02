@@ -590,14 +590,14 @@
             <version>1.1</version>
             <executions>
               <execution>
-                <id>Run Unit Tests on Windows</id>
+                <id>Run Unit Tests on Mac</id>
                 <goals>
                   <goal>exec</goal>
                 </goals>
                 <phase>test</phase>
                 <configuration>
 				  <workingDirectory>${project.build.sourceDirectory}/build/bin</workingDirectory>
-                  <executable>TestFramework</executable>
+                  <executable>${project.build.sourceDirectory}/build/bin/TestFramework</executable>
                   <arguments>
                     <argument>--gtest_output=xml:test_output.xml</argument>
                   </arguments>
