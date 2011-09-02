@@ -590,7 +590,7 @@
             <version>1.1</version>
             <executions>
               <execution>
-                <id>Run Unit Tests on Windows</id>
+                <id>Run Unit Tests on Mac</id>
                 <goals>
                   <goal>exec</goal>
                 </goals>
