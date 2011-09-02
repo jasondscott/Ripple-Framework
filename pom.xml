@@ -601,7 +601,7 @@
                   <arguments>
                     <argument>TestFramework.app</argument>
                     <argument>--args</argument>
-                    <argument>--gtest_output=xml:test_output.xml</argument>
+                    <argument>--gtest_output=xml:${project.build.sourceDirectory}/build/bin/test_output.xml</argument>
                   </arguments>
                 </configuration>
               </execution>
