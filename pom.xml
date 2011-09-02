@@ -597,8 +597,9 @@
                 <phase>test</phase>
                 <configuration>
 				  <workingDirectory>${project.build.sourceDirectory}/build/bin</workingDirectory>
-                  <executable>TestFramework</executable>
+                  <executable>open</executable>
                   <arguments>
+                    <argument>TestFramework.app</argument>				
                     <argument>--gtest_output=xml:test_output.xml</argument>
                   </arguments>
                 </configuration>
