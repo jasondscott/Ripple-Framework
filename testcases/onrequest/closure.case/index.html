@@ -1,19 +1,32 @@
 <html>
-	<body>
+	<body  style="background-color:Red;">
         <script type="text/javascript">
-            (function () {
-               var awesome = "awesome";
-
-                window.onRequest = function (request) {
-                    if (awesome) {
-                        request.allow();
-                    }
-                };
-            })();
-
-            window.addEventListener("load", function () {
-                stagewebview.loadUrl("frame.html");
+ 
+          (function () {
+            stagewebview.onDocumentCreated.connect(function () {
+              stagewebview.javaScriptInjected();
             });
+
+            var awesome = "awesome";
+            alert(awesome);
+
+            window.onRequest = function (request) {
+              if (awesome) {
+                alert(request.url);
+                request.allow();
+              }
+            };
+
+            alert(window.onRequest);
+
+          })();
+
+          window.addEventListener("load", function () {
+            stagewebview.loadUrl("frame.html");
+            stagewebview.setWindowGeometry(100, 100, 360, 480);
+          });
         </script>
+
+        test case:onrequest/closure.case/index.html
 	</body>
 </html>

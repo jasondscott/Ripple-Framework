@@ -1,6 +1,11 @@
 <html>
-	<body>
+	<body style="background-color:Red;">
         <script type="text/javascript">
+          stagewebview.onDocumentCreated.connect(function () {
+            alert("injecting js code ...");
+            stagewebview.javaScriptInjected();
+          });
+
             window.onRequest = function (request) {
                 alert("we should never see this!");
                 request.deny();
@@ -11,7 +16,8 @@
             };
 
             window.addEventListener("load", function () {
-                stagewebview.loadUrl("frame.html");
+              stagewebview.loadUrl("frame.html");
+              stagewebview.setWindowGeometry(100, 100, 360, 480);
             });
         </script>
 	</body>
