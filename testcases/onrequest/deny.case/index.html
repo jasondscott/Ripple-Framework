@@ -9,13 +9,13 @@
           window.onRequest = function (request) {
             document.getElementById("msg").innerText = request.url;
             if (request.url == "http://pmd.570news.com/podcasts/gary_doyle/Gary-Doyle_1-2_2010-07-14.mp3")
-              request.allow();
+              request.deny();
             else
               request.allow();
           };
 
           window.addEventListener("load", function () {
-            stagewebview.loadUrl("frame.html");
+            stagewebview.loadUrl("http://localhost/testcases/onrequest/deny.case/frame.html");
             stagewebview.setWindowGeometry(100, 200, 480, 480);
           });
         </script>

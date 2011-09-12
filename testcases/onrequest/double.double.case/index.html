@@ -2,7 +2,6 @@
 	<body style="background-color:Red;">
         <script type="text/javascript">
           stagewebview.onDocumentCreated.connect(function () {
-            alert("injecting js code ...");
             stagewebview.javaScriptInjected();
           });
 
@@ -16,7 +15,7 @@
             };
 
             window.addEventListener("load", function () {
-              stagewebview.loadUrl("frame.html");
+              stagewebview.loadUrl("http://localhost/testcases/onrequest/double.double.case/frame.html");
               stagewebview.setWindowGeometry(100, 100, 360, 480);
             });
         </script>

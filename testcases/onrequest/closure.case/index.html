@@ -1,32 +1,27 @@
 <html>
 	<body  style="background-color:Red;">
+     test case:onrequest/closure.case/index.html
         <script type="text/javascript">
- 
           (function () {
             stagewebview.onDocumentCreated.connect(function () {
+              alert("injecting js code into internal page ...");
               stagewebview.javaScriptInjected();
             });
 
             var awesome = "awesome";
-            alert(awesome);
 
             window.onRequest = function (request) {
               if (awesome) {
-                alert(request.url);
                 request.allow();
               }
             };
 
-            alert(window.onRequest);
-
           })();
 
           window.addEventListener("load", function () {
-            stagewebview.loadUrl("frame.html");
+            stagewebview.loadUrl("http://localhost/testcases/onrequest/closure.case/frame.html");
             stagewebview.setWindowGeometry(100, 100, 360, 480);
           });
         </script>
-
-        test case:onrequest/closure.case/index.html
 	</body>
 </html>
