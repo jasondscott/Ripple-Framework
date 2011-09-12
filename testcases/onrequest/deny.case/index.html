@@ -1,15 +1,25 @@
 <html>
-	<body>
+	<body style="background-color:Red;">
         <div id="msg"></div>
         <script type="text/javascript">
-            window.onRequest = function (request) {
-                document.getElementById("msg").innerText = request.url;
-                request.deny();
-            };
+          stagewebview.javaScriptWindowCleared.connect(function () {
+            alert("injecting js code ...");
+            stagewebview.javaScriptInjected();
+          });
 
-            window.addEventListener("load", function () {
-                stagewebview.loadUrl("frame.html");
-            });
+          window.onRequest = function (request) {
+            //alert(request.url);
+            document.getElementById("msg").innerText = request.url;
+            if (request.url == "http://pmd.570news.com/podcasts/gary_doyle/Gary-Doyle_1-2_2010-07-14.mp3")
+              request.deny();
+            else
+              request.allow();
+          };
+
+          window.addEventListener("load", function () {
+            stagewebview.loadUrl("http://localhost/testcases/onrequest/deny.case/frame.html");
+            stagewebview.setWindowGeometry(100, 200, 480, 480);
+          });
         </script>
 	</body>
 </html>
